@@ -1,34 +1,70 @@
 <html>
-<script>
+    <script>
 
-function myFunction() {
-	var first = document.getElementById("first").value;
-	var second = document.getElementById("second").value;
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-        document.getElementById("answer").innerHTML = "Answer: " + this.responseText;
-        }
-    };
-    xhttp.open("GET", "https://uwtjfviwjc.execute-api.us-east-1.amazonaws.com/default/mldeploymentwebsitelambda?key1=" + first + "&key2=" + second, true);
-    xhttp.send();
+    function compute() {
+        let operation = document.getElementById("operation").value;
+        let firstNum = document.getElementById("firstNum").value;
+        let secondNum = document.getElementById("secondNum").value;
+        let xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("answer").innerHTML = "Answer: " + this.responseText;
+            }
+        };
+        xhttp.open("GET", "https://90d8qmwsnc.execute-api.us-east-1.amazonaws.com/number-crunching?key1=" + operation + "&key2=" + firstNum + "&key3=" + secondNum, true);
+        xhttp.send();
+    }
 
-}
+    function clearValues(){
+        document.getElementById("firstNum").value = ''
+        document.getElementById("secondNum").value = ''
+        document.getElementById("answer").innerHTML = "Answer: "
+    }
 
-</script>
-<body><div align="center"><br><br><br><br>
-<h1>Hello <span id="my-demo">Number Cruncher!</span></h1>
-<fieldset>
-<legend>Addition Calculator</legend> 
-<label>First Number:<br />
-<input type="text" name="first" id="first" /></label><br /> 
-<label>Second Number:<br />
-<input type="text" name="second" id="second" />
-</fieldset>
-<button onclick="myFunction()">Compute</button><br>
-<p id="answer">Answer:</p>
-<p></p>
-<img src="number crunching.png" width=250 height=250>
-</div>
-</body>
+    </script>
+
+
+    <body>
+        <div align="center">
+            
+            <h1>Hello Number Cruncher!</h1>
+            <fieldset>
+                <legend>Arithmetic Calculator</legend> 
+
+                <label>Choose an Operation:
+                    <br/>
+                    <select id="operation">
+                        <option value="1">Addition</option>
+                        <option value="2">Subtraction</option>
+                        <option value="3">Multiplication</option>
+                        <option value="4">Division</option>
+                    </select>
+                </label>
+
+                <br/>
+                <br/>
+
+                <label>First Number:
+                    <br/>
+                    <input type="text" id="firstNum" />
+                </label>
+
+                <br/>
+                <br/>
+
+                <label>Second Number:
+                    <br/>
+                    <input type="text" id="secondNum" />
+                </label>
+
+            </fieldset>
+            <br/>
+            <button onclick="compute()">Compute</button>
+            <button onclick="clearValues()">Clear Values</button>
+            <br/>
+            <p id="answer">Answer:</p>
+            
+            <img src="number crunching.png" width=250 height=250>
+        </div>
+    </body>
 </html>
